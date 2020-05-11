@@ -13,5 +13,3 @@
 
   // call swi_add_scripts during wp_enqueue_scripts action
   add_action('wp_enqueue_scripts', 'swi_add_scripts');
-
-?>

@@ -23,4 +23,3 @@ function register_swi_widget() {
   register_widget( 'SWI_Widget' );
 }
 add_action( 'widgets_init', 'register_swi_widget' );
- ?>
