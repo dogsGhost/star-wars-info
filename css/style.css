@@ -1,0 +1,5 @@
+/* theme override for testing */
+#colophon .widget-column .widget {
+  margin: 0 !important;
+  width: 100% !important;
+}
