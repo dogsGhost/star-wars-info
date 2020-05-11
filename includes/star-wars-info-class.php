@@ -2,7 +2,6 @@
 
 /**
  * @todo move api request to server-side
- * @todo change meta key name used from 'test field'
  */
 
 /**
@@ -36,7 +35,7 @@ class SWI_Widget extends WP_Widget
 	public function widget($args, $instance)
 	{
 		// value from database
-		$swi_val = get_post_custom_values('test field')[0];
+		$swi_val = get_post_custom_values('_swi_meta_key')[0];
 
 		echo $args['before_widget'];
 
