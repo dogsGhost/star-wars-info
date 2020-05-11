@@ -1,7 +1,6 @@
 <?php
 /**
  * Adds dropdown to bottom of page editor for setting character on a page
- * @todo save meta data correctly
  */
 
 function swi_custom_box_html($post)
@@ -43,6 +42,7 @@ function swi_custom_box_html($post)
 <?php
 }
 
+// display the metabox on the page
 function swi_add_custom_box()
 {
   add_meta_box(
@@ -54,6 +54,27 @@ function swi_add_custom_box()
   );
 }
 
+// save the value set in the dropdown to the page metadata in the database
+function swi_save_postdata($post_id)
+{
+  // make sure value passed exists and is a valid number
+  if (
+    array_key_exists('swi_field', $_POST) && 
+    is_numeric($_POST['swi_field']) &&
+    (
+      $_POST['swi_field'] * 1 > 0 &&
+      $_POST['swi_field'] * 1 < 81
+    )
+  ) {
+    update_post_meta(
+      $post_id,
+      '_swi_meta_key',
+      $_POST['swi_field']
+    );
+  }
+}
+
 add_action('add_meta_boxes', 'swi_add_custom_box');
+add_action('save_post', 'swi_save_postdata');
 
 ?>
