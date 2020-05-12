@@ -34,6 +34,7 @@ class SWI_Widget extends WP_Widget
 	{
 		// use value from database to query api
 		$swi_meta_key = get_post_custom_values('_swi_meta_key');
+		$has_title = !empty($instance['title']);
 
 		// only display if value is set
 		if ($swi_meta_key) {
@@ -42,7 +43,7 @@ class SWI_Widget extends WP_Widget
 
 			echo $args['before_widget'];
 
-			if (!empty($instance['title'])) {
+			if ($has_title) {
 				// widget title
 				echo $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
 			} ?>
@@ -64,10 +65,11 @@ class SWI_Widget extends WP_Widget
 	<?php 
 			echo $args['after_widget'];
 		} else {
+			// show message if user logged in
 			if (is_user_logged_in()) {
 				echo $args['before_widget'];
 
-				if (!empty($instance['title'])) {
+				if ($has_title) {
 					// widget title
 					echo $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
 				} ?>
