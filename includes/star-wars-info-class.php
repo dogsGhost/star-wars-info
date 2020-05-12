@@ -33,31 +33,37 @@ class SWI_Widget extends WP_Widget
 	public function widget($args, $instance)
 	{
 		// use value from database to query api
-		$swi_val = get_post_custom_values('_swi_meta_key')[0];
-		$data = swi_get_data($swi_val);
+		$swi_meta_key = get_post_custom_values('_swi_meta_key');
 
-		echo $args['before_widget'];
+		// only display if value is set
+		if ($swi_meta_key) {
+			$swi_val = $swi_meta_key[0];
+			$data = swi_get_data($swi_val);
 
-		if (!empty($instance['title'])) {
-			// widget title
-			echo $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
-		} ?>
+			echo $args['before_widget'];
 
-		<!-- widget output -->
-		<div class="swi-container">
-			<h4 class="swi-title">Character info for <?php echo $data->name ?></h4>
-			<dl class="swi-dl">
-				<dt class="swi-dt">height:</dt>
-				<dd class="swi-dd"><?php echo $data->height ?>cm</dd>
+			if (!empty($instance['title'])) {
+				// widget title
+				echo $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
+			} ?>
 
-				<dt class="swi-dt">weight:</dt>
-				<dd class="swi-dd"><?php echo $data->mass ?>kg</dd>
+			<!-- widget output -->
+			<div class="swi-container">
+				<h4 class="swi-title">Character info for <?php echo $data->name ?></h4>
+				<dl class="swi-dl">
+					<dt class="swi-dt">height:</dt>
+					<dd class="swi-dd"><?php echo $data->height ?>cm</dd>
 
-				<dt class="swi-dt">eye color:</dt>
-				<dd class="swi-dd"><?php echo $data->eye_color ?></dd>
-			</dl>
-		</div>
-	<?php echo $args['after_widget'];
+					<dt class="swi-dt">weight:</dt>
+					<dd class="swi-dd"><?php echo $data->mass ?>kg</dd>
+
+					<dt class="swi-dt">eye color:</dt>
+					<dd class="swi-dd"><?php echo $data->eye_color ?></dd>
+				</dl>
+			</div>
+	<?php 
+			echo $args['after_widget'];
+		} // end if
 	}
 
 	/**
