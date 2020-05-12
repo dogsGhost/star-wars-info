@@ -4,7 +4,7 @@
  * @wordpress-plugin
  * Plugin Name:       Star Wars Info
  * Description:       Display Star Wars character information
- * Version:           0.0.1
+ * Version:           1.0.0
  * Author:            David Wilhelm
  * Author URI:        http://davwilh.com/
  */
