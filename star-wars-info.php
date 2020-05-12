@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @wordpress-plugin
  * Plugin Name:       Star Wars Info
@@ -9,7 +10,7 @@
  */
 
 // prevent direct access to file for security
-if(!defined('ABSPATH')) {
+if (!defined('ABSPATH')) {
   exit;
 }
 
@@ -19,7 +20,8 @@ require_once(plugin_dir_path(__FILE__) . '/includes/star-wars-info-class.php');
 require_once(plugin_dir_path(__FILE__) . '/includes/star-wars-info-metabox.php');
 
 // register SWI_Widget widget
-function register_swi_widget() {
-  register_widget( 'SWI_Widget' );
+function register_swi_widget()
+{
+  register_widget('SWI_Widget');
 }
-add_action( 'widgets_init', 'register_swi_widget' );
+add_action('widgets_init', 'register_swi_widget');
