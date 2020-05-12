@@ -1,10 +1,6 @@
 <?php
 
 /**
- * @todo move api request to server-side
- */
-
-/**
  * Adds Star Wars Info widget.
  */
 class SWI_Widget extends WP_Widget
@@ -36,26 +32,36 @@ class SWI_Widget extends WP_Widget
 	{
 		// value from database
 		$swi_val = get_post_custom_values('_swi_meta_key')[0];
+		// trailing slash is important!
+		$url = 'https://swapi.dev/api/people/' . $swi_val . '/';
+		$client = curl_init($url);
+		curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+		$response = curl_exec($client);
+		$data = json_decode($response);
+		curl_close($client);
 
 		echo $args['before_widget'];
 
 		if (!empty($instance['title'])) {
 			// widget title
 			echo $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
-		}
+		} ?>
 
-		// widget output
-		echo '
-    <div id="sw-app" class="sw-app">
-			<div id="sw-dashboard" class="sw-dashboard">
-				...loading dashboard...
-			</div>
+		<!-- widget output -->
+		<div>
+			<h4>Character info for <?php echo $data->name ?></h4>
+			<dl>
+				<dt>height:</dt>
+				<dd><?php echo $data->height ?>cm</dd>
+
+				<dt>weight:</dt>
+				<dd><?php echo $data->mass ?>kg</dd>
+
+				<dt>eye color:</dt>
+				<dd><?php echo $data->eye_color ?></dd>
+			</dl>
 		</div>
-		<script>
-			window.addEventListener("load", loadSWI(' . $swi_val . '));
-		</script>';
-
-		echo $args['after_widget'];
+	<?php echo $args['after_widget'];
 	}
 
 	/**
@@ -68,7 +74,7 @@ class SWI_Widget extends WP_Widget
 	public function form($instance)
 	{
 		$title = !empty($instance['title']) ? $instance['title'] : esc_html__('Star Wars Info', 'swi_domain');
-?>
+	?>
 		<!-- title markup -->
 		<p>
 			<label for="<?php echo esc_attr($this->get_field_id('title')); ?>">

@@ -5,10 +5,10 @@
       'swi-main-style', 
       plugins_url() . '/star-wars-info/css/style.css'
     );
-    wp_enqueue_script(
-      'swi-main-js',
-      plugins_url() . '/star-wars-info/js/main.js'
-    );
+    // wp_enqueue_script(
+    //   'swi-main-js',
+    //   plugins_url() . '/star-wars-info/js/main.js'
+    // );
   }
 
   // call swi_add_scripts during wp_enqueue_scripts action
