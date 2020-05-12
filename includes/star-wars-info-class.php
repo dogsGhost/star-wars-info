@@ -63,7 +63,24 @@ class SWI_Widget extends WP_Widget
 			</div>
 	<?php 
 			echo $args['after_widget'];
-		} // end if
+		} else {
+			if (is_user_logged_in()) {
+				echo $args['before_widget'];
+
+				if (!empty($instance['title'])) {
+					// widget title
+					echo $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
+				} ?>
+
+				<!-- widget output -->
+				<div class="swi-container">
+					No value set for this page.
+				</div>
+
+		<?php
+				echo $args['after_widget'];
+			}
+		}
 	}
 
 	/**
