@@ -1,5 +1,7 @@
 <?php
 
+require_once(plugin_dir_path(__FILE__) . 'star-wars-info-get-data.php');
+
 /**
  * Adds dropdown to bottom of page editor for setting character on a page
  */
@@ -8,15 +10,8 @@ function swi_custom_box_html($post)
 {
   // see if value is already saved in metadata
   $savedVal = get_post_meta($post->ID, '_swi_meta_key', true);
-
   // get data from API
-  $url = 'https://swapi.dev/api/people/';
-  $client = curl_init($url);
-  curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
-  $response = curl_exec($client);
-  $data = json_decode($response);
-  curl_close($client);
-
+  $data = swi_get_data('');
   // convert data for use in dropdown
   $people = array();
   foreach ($data->results as $key => $result) {

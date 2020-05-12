@@ -1,5 +1,7 @@
 <?php
 
+require_once(plugin_dir_path(__FILE__) . 'star-wars-info-get-data.php');
+
 /**
  * Adds Star Wars Info widget.
  */
@@ -30,15 +32,9 @@ class SWI_Widget extends WP_Widget
 	 */
 	public function widget($args, $instance)
 	{
-		// value from database
+		// use value from database to query api
 		$swi_val = get_post_custom_values('_swi_meta_key')[0];
-		// trailing slash is important!
-		$url = 'https://swapi.dev/api/people/' . $swi_val . '/';
-		$client = curl_init($url);
-		curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
-		$response = curl_exec($client);
-		$data = json_decode($response);
-		curl_close($client);
+		$data = swi_get_data($swi_val);
 
 		echo $args['before_widget'];
 
