@@ -1,20 +1,7 @@
-.widget_swi_widget {
-  margin: 0 auto 1rem !important;
-  width: 100%;
-  max-width: 960px;
-}
-
+/* base widget styles */
+.widget_swi_widget {}
 .swi-container {}
 .swi-title {}
 .swi-dl {}
 .swi-dt {}
-
-.swi-dd {
-  line-height: 1.1;
-}
-
-/* theme override for testing */
-#colophon .widget-column .widget {
-  margin: 0 !important;
-  width: 100% !important;
-}
+.swi-dd {}

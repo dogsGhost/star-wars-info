@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 }
 
 // load files
-require_once(plugin_dir_path(__FILE__) . '/includes/star-wars-info-scripts.php');
+// require_once(plugin_dir_path(__FILE__) . '/includes/star-wars-info-scripts.php');
 require_once(plugin_dir_path(__FILE__) . '/includes/star-wars-info-class.php');
 require_once(plugin_dir_path(__FILE__) . '/includes/star-wars-info-metabox.php');
 
